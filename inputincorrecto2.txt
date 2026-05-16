@@ -1,0 +1,6 @@
+* * * * JAN
+
+
+
+Por qué es inválido: Tu lexer solo tiene reglas para STAR (*), NUMBER ([0-9]+), los literales de texto (@yearly, etc.), y los caracteres especiales de separación (/, -, ,). 
+La cadena de texto JAN (letras) no coincide con ningún token definido en el Lexer
