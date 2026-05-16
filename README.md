@@ -23,7 +23,7 @@ Requisitos: Tener instalado Java JDK 11 o superior y ANTLR4.
 
 Clonar el repositorio:
 
-git clone [https://github.com/tu-usuario/proyecto-cron.git](https://github.com/tu-usuario/proyecto-cron.git)
+git clone https://github.com/juancito-01/cron-analizador.git
 
 
 📝 Sintaxis Soportada
