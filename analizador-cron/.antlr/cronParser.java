@@ -1,4 +1,4 @@
-// Generated from c:/Users/Juan/OneDrive/Escritorio/cron.g4/cron.g4 by ANTLR 4.13.1
+// Generated from c:/Users/Juan/OneDrive/Escritorio/cron.g4/analizador-cron/cron.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
