@@ -1,1 +1,10 @@
-5 8-10,14-16 *
+* 0-23/2 1,2,5 12 *
+
+
+0-23/2 coincide con la regla range (NUMBER '-' NUMBER ('/' NUMBER)?).
+
+1,2,5 coincide con la regla list (compuesta por item de tipo value).
+
+12 es un value (NUMBER).
+
+El último * es otro wildcard. Todos son variantes válidas de time_field.
