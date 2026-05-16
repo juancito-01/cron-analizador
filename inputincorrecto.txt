@@ -1,0 +1,6 @@
+1-5/2,10,20 * * * *
+
+
+Por qué es inválido: Si miramos la regla list, esta se compone de item (',' item)*, y la regla item solo acepta range | value. 
+Tu regla range permite opcionalmente un paso ('/' NUMBER), pero la regla item no acepta un paso complejo dentro de una lista (las listas no admiten la regla step).
+Al intentar parsear 1-5/2 como el primer elemento de la lista, el parser fallará.
