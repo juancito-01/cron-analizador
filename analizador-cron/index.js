@@ -4,7 +4,7 @@ import CronLexer from './generated/cronLexer.js';
 import CronParser from './generated/cronParser.js';
 import CustomCronVisitor from './customcronvisitator.js';
 
-// 1. Lectura del archivo
+// 1. Lectura del archivo input.txt
 const input = fs.readFileSync("input.txt", "utf8");
 const chars = new antlr4.InputStream(input);
 
@@ -14,12 +14,30 @@ const tokens = new antlr4.CommonTokenStream(lexer);
 
 // 3. Análisis Sintáctico
 const parser = new CronParser(tokens);
-const tree = parser.schedule(); // 'schedule' es tu regla inicial
+
+// --- DETECTOR INFALIBLE DE ERRORES ---
+let contadorErrores = 0;
+
+class ContadorDeErrores extends antlr4.error.ErrorListener {
+    syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
+        contadorErrores++;
+    }
+}
+
+// Le acoplamos nuestro detector al lexer y al parser
+const detector = new ContadorDeErrores();
+lexer.removeErrorListeners();
+lexer.addErrorListener(detector);
+parser.removeErrorListeners();
+parser.addErrorListener(detector);
+// -------------------------------------
+
+// Ejecutamos la regla inicial después de activar el detector
+const tree = parser.schedule(); 
 
 // --- SALIDA POR CONSOLA ---
 
-// CORRECCIÓN AQUÍ: Usamos 'numberOfSyntaxErrors' de ANTLR
-if (parser.numberOfSyntaxErrors === 0) {
+if (contadorErrores === 0) {
     
     console.log("Entrada válida.");
     
@@ -34,6 +52,6 @@ if (parser.numberOfSyntaxErrors === 0) {
     console.log(resultado);
 
 } else {
-    // Si entra acá, ANTLR ya habrá escupido los "token recognition error" automáticamente arriba
-    console.log(`\nEntrada INCORRECTA: se encontraron ${parser.numberOfSyntaxErrors} errores sintácticos.`);
+    // Si nuestro contador sumó aunque sea 1 error, frena de inmediato
+    console.log(`\nEntrada INCORRECTA: se encontraron ${contadorErrores} errores sintácticos.`);
 }
