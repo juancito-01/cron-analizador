@@ -14,23 +14,26 @@ const tokens = new antlr4.CommonTokenStream(lexer);
 
 // 3. Análisis Sintáctico
 const parser = new CronParser(tokens);
-const tree = parser.schedule(); // 'schedule' es tu regla inicial según image_d9f2fd.png
+const tree = parser.schedule(); // 'schedule' es tu regla inicial
 
-// --- SALIDA POR CONSOLA (Como en la foto) ---
+// --- SALIDA POR CONSOLA ---
 
-// Punto 1 de la tarea: Informar si la entrada es correcta
-if (parser.syntaxErrorsCount === 0) {
+// CORRECCIÓN AQUÍ: Usamos 'numberOfSyntaxErrors' de ANTLR
+if (parser.numberOfSyntaxErrors === 0) {
+    
     console.log("Entrada válida.");
+    
+    // Punto 3 de la tarea: Mostrar el árbol de análisis sintáctico en texto
+    console.log("Árbol de derivación: " + tree.toStringTree(parser.ruleNames));
+
+    // Punto 4 de la tarea: Interpretación (Traducción)
+    const visitor = new CustomCronVisitor();
+    const resultado = visitor.visit(tree);
+
+    console.log("\nResultado (Traducción):");
+    console.log(resultado);
+
 } else {
-    console.log(`Entrada con errores: se encontraron ${parser.syntaxErrorsCount} errores.`);
+    // Si entra acá, ANTLR ya habrá escupido los "token recognition error" automáticamente arriba
+    console.log(`\nEntrada INCORRECTA: se encontraron ${parser.numberOfSyntaxErrors} errores sintácticos.`);
 }
-
-// Punto 3 de la tarea: Mostrar el árbol de análisis sintáctico en texto
-console.log("Árbol de derivación: " + tree.toStringTree(parser.ruleNames));
-
-// Punto 4 de la tarea: Interpretación (Traducción)
-const visitor = new CustomCronVisitor();
-const resultado = visitor.visit(tree);
-
-console.log("\nResultado (Traducción):");
-console.log(resultado);
