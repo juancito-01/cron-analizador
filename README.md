@@ -51,3 +51,5 @@ input_correcto_2.txt: Expresiones con rangos (-) e intervalos (/).
 input_incorrecto_1.txt: Valores fuera de rango (ej. minuto 65).
 
 input_incorrecto_2.txt: Formatos con caracteres no permitidos.
+<img width="1388" height="261" alt="image" src="https://github.com/user-attachments/assets/5bff8924-e001-4b39-86b6-ad4c5d2e1667" />
+
